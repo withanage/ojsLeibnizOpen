@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE version SYSTEM "../../../lib/pkp/dtd/pluginVersion.dtd">
+
+<!--
+  * plugins/oaiMetadataFormats/wgl/version.xml
+  *
+  * Copyright (c) 2014-2018 Simon Fraser University
+  * Copyright (c) 2003-2018 John Willinsky
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  * Plugin version information.
+  -->
+<version>
+	<application>wgl</application>
+	<type>plugins.oaiMetadataFormats</type>
+	<release>1.0.0.1</release>
+	<date>2019-02-13</date>
+</version>
