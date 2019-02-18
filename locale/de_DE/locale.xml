@@ -10,8 +10,11 @@
   * Localization information: https://pkp.sfu.ca/wiki/index.php?title=OJS:_German_(de_DE)
   * Localization strings.
   -->
- 
+
 <locale name="de_DE" full_name="Deutsch (Deutschland)">
 	<message key="plugins.OAIMetadata.wgl.displayName">WGL-Metadaten-Format</message>
 	<message key="plugins.OAIMetadata.wgl.description">Strukturiert Metadaten auf eine zum WGL-Format kompatible Weise.</message>
+	<!-- settings -->
+	<message key="plugins.generic.wgl.settings.title">Leibniz Open OAI Plugin</message>
+	<message key="plugins.OAIMetadata.wgl.settings.description">Definieren Sie die Liste der unterstützenden Einrichtungen, die Sie für Leibniz Plugin hinzufügen möchten. </message>
 </locale>

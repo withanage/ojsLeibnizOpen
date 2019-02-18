@@ -70,8 +70,6 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC {
 		}
 
 
-		//TODO <wgl:wgltype>Buchkapitel / Sammelwerksbeitrag</wgl:wgltype>
-
 		// remove old DC header
 		$oaiDCElement = $xpath->query("//oai_dc:dc")->item(0);
 		$getParent = $oaiDCElement->parentNode;
@@ -88,7 +86,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC {
 	 * @param $prefix string
 	 * @return DOMElement
 	 */
-	function renameNamespace($node, $doc, $prefix, $traverse = true)
+	function renameNamespace($node, $doc, $prefix)
 	{
 		$prefixedName = preg_replace('/.*:/', $prefix . ':', $node->nodeName);
 		$newElement = $doc->createElement($prefixedName);

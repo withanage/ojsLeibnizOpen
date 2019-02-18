@@ -91,6 +91,57 @@ class OAIMetadataFormatPlugin_WGL extends OAIMetadataFormatPlugin {
 	static function getNamespace() {
 		return 'http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/';
 	}
+
+
+
+	/**
+	 * @copydoc Plugin::getActions()
+	 */
+	function getActions($request, $actionArgs) {
+		$router = $request->getRouter();
+		import('lib.pkp.classes.linkAction.request.AjaxModal');
+		return array_merge(
+			$this->getEnabled()?array(
+				new LinkAction(
+					'settings',
+					new AjaxModal(
+						$router->url($request, null, null, 'manage', null, array_merge($actionArgs, array('verb' => 'settings'))),
+						$this->getDisplayName()
+					),
+					__('manager.plugins.settings'),
+					null
+				),
+			):array(),
+			parent::getActions($request, $actionArgs)
+		);
+	}
+
+	function manage($args, $request) {
+		$this->import('WGLSettingsForm');
+		switch($request->getUserVar('verb')) {
+			case 'settings':
+				$settingsForm = new WGLSettingsForm($this);
+				$settingsForm->initData();
+				return new JSONMessage(true, $settingsForm->fetch($request));
+			case 'save':
+				$settingsForm = new WGLSettingsForm($this);
+				$settingsForm->readInputData();
+				if ($settingsForm->validate()) {
+					$settingsForm->execute();
+					$notificationManager = new NotificationManager();
+					$notificationManager->createTrivialNotification(
+						$request->getUser()->getId(),
+						NOTIFICATION_TYPE_SUCCESS,
+						array('contents' => __('plugins.generic.usageStats.settings.saved'))
+					);
+					return new JSONMessage(true);
+				}
+				return new JSONMessage(true, $settingsForm->fetch($request));
+		}
+		return parent::manage($args, $request);
+	}
+
+
 }
 
 

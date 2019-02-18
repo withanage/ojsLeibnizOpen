@@ -10,8 +10,11 @@
   * Localization information: https://pkp.sfu.ca/wiki/index.php?title=Translating_OxS
   * Localization strings.
   -->
- 
+
 <locale name="en_US" full_name="U.S. English">
 	<message key="plugins.OAIMetadata.wgl.displayName">WGL Metadata Format</message>
 	<message key="plugins.OAIMetadata.wgl.description">Structures metadata in a way that is consistent with the WGL format.</message>
+	<!-- settings -->
+	<message key="plugins.generic.wgl.settings.title">Leibniz Open OAI Plugin</message>
+	<message key="plugins.OAIMetadata.wgl.settings.description">Define the list of supporting agencies, you like to include for Leibniz Plugin. </message>
 </locale>
