@@ -132,7 +132,7 @@ class OAIMetadataFormatPlugin_WGL extends OAIMetadataFormatPlugin {
 					$notificationManager->createTrivialNotification(
 						$request->getUser()->getId(),
 						NOTIFICATION_TYPE_SUCCESS,
-						array('contents' => __('plugins.generic.usageStats.settings.saved'))
+						array('contents' => __('plugins.OAIMetadata.wgl.settings.saved'))
 					);
 					return new JSONMessage(true);
 				}

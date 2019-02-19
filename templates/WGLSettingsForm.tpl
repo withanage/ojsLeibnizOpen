@@ -20,7 +20,7 @@
 
 	{include file="controllers/notification/inPlaceNotification.tpl" notificationId="WGLSettingsFormNotification"}
 
-	{fbvFormArea id="WGLDisplayOptions" title="plugins.generic.wgl.settings.title"}
+	{fbvFormArea id="WGLDisplayOptions" title="plugins.OAIMetadata.wgl.settings.title"}
 
 		{fbvFormSection for="settingsDescription" description="plugins.OAIMetadata.wgl.settings.description"}
 		{fbvElement type="text" id="wglSettings" value=$wglSettings size=$fbvStyles.size.SMALL}

@@ -51,7 +51,6 @@ class WGLSettingsForm extends Form
 
 	function fetch($request)
 	{
-		$templateMgr = TemplateManager::getManager($request);
 		return parent::fetch($request);
 
 	}

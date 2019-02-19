@@ -15,6 +15,8 @@
 	<message key="plugins.OAIMetadata.wgl.displayName">WGL Metadata Format</message>
 	<message key="plugins.OAIMetadata.wgl.description">Structures metadata in a way that is consistent with the WGL format.</message>
 	<!-- settings -->
-	<message key="plugins.generic.wgl.settings.title">Leibniz Open OAI Plugin</message>
+	<message key="plugins.OAIMetadata.wgl.settings.title">Leibniz Open OAI Plugin</message>
 	<message key="plugins.OAIMetadata.wgl.settings.description">Define the list of supporting agencies, you like to include for Leibniz Plugin. </message>
+	<!--notifications -->
+	<message key="plugins.OAIMetadata.wgl.settings.saved">Leibniz Open OAI plugin settings saved</message>
 </locale>
