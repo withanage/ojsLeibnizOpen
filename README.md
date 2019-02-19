@@ -1,10 +1,10 @@
 
-## OJS3.+ / OMP3.+ Leibniz-Open Plugin
+##  Leibniz-Open OAI Metadata Plugin for OJS 3.1.x and OMP 3.1.x
 
 OAI plugin for [Open Journal Systems](https://github.com/pkp/ojs) and [Open Monograph Press](https://github.com/pkp/omp) which adds a link to the submissions page.
 
 ## About
-This plugin exposes metadata in oai interface in the Lebiniz-Open metadata format.
+This plugin exposes metadata in OJS/ OMP OAI interface in the Lebiniz-Open metadata format.
 
 
 ## License
