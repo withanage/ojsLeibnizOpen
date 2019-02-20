@@ -35,6 +35,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 		$doc = parent::toXml($publicationFormat);
 		$dom = DOMDocument::loadXML($doc);
 		$dom->formatOutput = true;
+		$dom->encoding ='UTF-8';
 
 
 		$siteAgencies = $this->_getSiteAgencies($submission);
