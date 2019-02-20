@@ -27,7 +27,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	 * @param $format
 	 * @return string
 	 */
-	function toXml($record, $format = null) {
+	public function toXml($record, $format = null) {
 		$submission = $record->getData('article');
 		$submission = (!empty($submission)) ? $submission : $record->getData('monograph');
 
@@ -65,7 +65,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 
 			$wgl = $this->_createWGLElement($dom);
 
-			$wgl = $this->_copyDCElements($xpath, $dom, $wgl);
+			$wgl = $this->_renameDCElements($xpath, $dom, $wgl);
 
 			$wgl = $this->_setWGLType($submission, $dom, $wgl);
 
@@ -90,7 +90,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	 * @param $prefix string
 	 * @return DOMElement
 	 */
-	function renameNamespace($node, $doc, $prefix) {
+	public function renameNamespace($node, $doc, $prefix) {
 		$prefixedName = preg_replace('/.*:/', $prefix . ':', $node->nodeName);
 		$newElement = $doc->createElement($prefixedName);
 
@@ -140,7 +140,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	 * @param $ne
 	 * @return mixed
 	 */
-	protected function _copyDCElements(DOMXPath $xpath, $dom, $ne)
+	protected function _renameDCElements(DOMXPath $xpath, $dom, $ne)
 	{
 		$dcElements = $xpath->query("//oai_dc:dc/*");
 		foreach ($dcElements as $node) {

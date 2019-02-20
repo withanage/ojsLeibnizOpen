@@ -81,7 +81,7 @@ class OAIMetadataFormatPlugin_WGL extends OAIMetadataFormatPlugin {
 	}
 
 	static function getMetadataPrefix() {
-		return 'wgl';
+		return 'oai_wgl';
 	}
 
 	static function getSchema() {
@@ -118,13 +118,14 @@ class OAIMetadataFormatPlugin_WGL extends OAIMetadataFormatPlugin {
 
 	function manage($args, $request) {
 		$this->import('WGLSettingsForm');
+		$context = Request::getContext();
 		switch($request->getUserVar('verb')) {
 			case 'settings':
-				$settingsForm = new WGLSettingsForm($this);
+				$settingsForm = new WGLSettingsForm($this,$context->getId());
 				$settingsForm->initData();
 				return new JSONMessage(true, $settingsForm->fetch($request));
 			case 'save':
-				$settingsForm = new WGLSettingsForm($this);
+				$settingsForm = new WGLSettingsForm($this,$context->getId());
 				$settingsForm->readInputData();
 				if ($settingsForm->validate()) {
 					$settingsForm->execute();
