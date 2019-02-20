@@ -28,6 +28,7 @@ git checkout your_branch
 Via Zip file (tar.gz)
 
   - Unpack the plugin tar.gz file to your plugins/oaiMetadataFormats directory
+   (see [Releases](https://github.com/withanage/ojsLeibnizOpen/releases))
  
 ## Settings   
   - Navigate to Management > Website Settings > Plugins > OAI Metadata Format Plugins
