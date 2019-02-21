@@ -1,7 +1,10 @@
 
 ##  Leibniz-Open OAI Metadata Plugin for OJS 3.1.x and OMP 3.1.x
 
-OAI plugin for [Open Journal Systems](https://github.com/pkp/ojs) and [Open Monograph Press](https://github.com/pkp/omp) which adds a link to the submissions page.
+OAI plugin for [Open Journal Systems](https://github.com/pkp/ojs) and [Open Monograph Press](https://github.com/pkp/omp) 
+which exposes metadata in the leibniz harvesting scheme. 
+
+http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/oai_wgl.xsd
 
 ## About
 This plugin exposes metadata in OJS/ OMP OAI interface in the Lebiniz-Open metadata format.
@@ -25,7 +28,7 @@ git checkout your_branch
 
 ```
 
-Via Zip file (tar.gz)
+via zip file (tar.gz)
 
   - Unpack the plugin tar.gz file to your plugins/oaiMetadataFormats directory
    (see [Releases](https://github.com/withanage/ojsLeibnizOpen/releases))

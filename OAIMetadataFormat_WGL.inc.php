@@ -80,7 +80,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 
 			$dom->appendChild($wgl);
 		}
-		return $dom->saveXML();
+		return $dom->saveXML($dom->documentElement);
 
 
 	}
