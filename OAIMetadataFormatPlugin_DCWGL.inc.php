@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/oaiMetadataFormats/wgl/OAIMetadataFormatPlugin_WGL.inc.php
+ * @file plugins/oaiMetadataFormats/wgl/OAIMetadataFormatPlugin_DCWGL.inc.php
  *
  * Distributed under the GNU GPL v3
  *
@@ -14,14 +14,14 @@
 
 import('lib.pkp.classes.plugins.OAIMetadataFormatPlugin');
 
-class OAIMetadataFormatPlugin_WGL extends OAIMetadataFormatPlugin {
+class OAIMetadataFormatPlugin_DCWGL extends OAIMetadataFormatPlugin {
 	/**
 	 * Get the name of this plugin. The name must be unique within
 	 * its category.
 	 * @return String name of plugin
 	 */
 	function getName() {
-		return 'OAIFormatPlugin_WGL';
+		return 'OAIMetadataFormatPlugin_DCWGL';
 	}
 
 	/**
@@ -77,7 +77,7 @@ class OAIMetadataFormatPlugin_WGL extends OAIMetadataFormatPlugin {
 
 
 	function getFormatClass() {
-		return 'OAIMetadataFormat_WGL';
+		return 'OAIMetadataFormat_DCWGL';
 	}
 
 	static function getMetadataPrefix() {

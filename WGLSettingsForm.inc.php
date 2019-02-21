@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/oaiMetadataFormats/wgl/WGLSettingsForm.inc.php
+ * @file plugins/oaiMetadataFormats/dcwgl/WGLSettingsForm.inc.php
  *
  * Distributed under the GNU GPL v3
 

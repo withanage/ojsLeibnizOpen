@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/oaiMetadataFormats/wgl/OAIMetadataFormat_WGL.inc.php
+ * @file plugins/oaiMetadataFormats/dcwgl/OAIMetadataFormat_DCWGL.inc.php
  *
  * Distributed under the GNU GPL v3
  *
@@ -18,7 +18,7 @@ import('lib.pkp.plugins.oaiMetadataFormats.dc.PKPOAIMetadataFormat_DC');
 /**
  * Class OAIMetadataFormat_WGL  Creates a Leibniz-Open XML File
  */
-class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
+class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 {
 	/**
 	 * @see lib/pkp/plugins/oaiMetadataFormats/dc/PKPOAIMetadataFormat_DC::toXml()
@@ -130,7 +130,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	protected function _getSubmissionAgencies() {
 		$context = Request::getContext();
 		$contextId = $context ? $context->getId() : CONTEXT_ID_NONE;
-		$plugin = PluginRegistry::getPlugin('oaiMetadataFormats', 'OAIFormatPlugin_WGL');
+		$plugin = PluginRegistry::getPlugin('oaiMetadataFormats', 'OAIMetadataFormatPlugin_DCWGL');
 		$pluginSettings = $plugin->getSetting($contextId, 'wglSettings');
 		return $pluginSettings;
 	}
