@@ -20,24 +20,38 @@ class WGLSettingsForm extends Form
 	 * @param $plugin
 	 */
 	/***	 * @var context	 */
-	private $_context;
+	private $_contextId;
 
-	/** @var Settings Plugin */
-	private $_plugin;
+	/**
+	 * @return context
+	 */
+	function _getContextId() {
+		return $this->_contextId;
+	}
+	/** @var DOIPubIdPlugin */
+	var $_plugin;
+
+	/**
+	 * Get the plugin.
+	 * @return DOIPubIdPlugin
+	 */
+	function _getPlugin() {
+		return $this->_plugin;
+	}
+
 
 	function __construct($plugin, $contextId) {
-		$this->_context = $contextId;
+		$this->_contextId = $contextId;
 		$this->_plugin = $plugin;
 
-		parent::__construct(join(DIRECTORY_SEPARATOR,array($plugin->getTemplatePath() ,'templates', 'WGLSettingsForm.tpl')));
+		parent::__construct($plugin->getTemplateResource('WGLSettingsForm.tpl'));
 		$this->setData('pluginName', $plugin->getName());
 	}
 
 	function initData()
 	{
-		$plugin = $this->_plugin;
-		$context = Request::getContext();
-		$contextId = $context ? $context->getId() : CONTEXT_ID_NONE;
+		$plugin = $this->_getPlugin();
+		$contextId =  $this->_getContextId();
 		$wglSettings = $plugin->getSetting($contextId, 'wglSettings');
 		if (isset($wglSettings) & !empty($wglSettings)) {
 			$this->setData('wglSettings', $wglSettings);

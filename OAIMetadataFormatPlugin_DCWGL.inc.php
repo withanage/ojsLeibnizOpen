@@ -92,6 +92,10 @@ class OAIMetadataFormatPlugin_DCWGL extends OAIMetadataFormatPlugin {
 		return 'http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/';
 	}
 
+	function instantiateSettingsForm($contextId) {
+		$this->import('classes.form.WGLSettingsForm');
+		return new WGLSettingsForm($this, $contextId);
+	}
 
 
 	/**
@@ -117,7 +121,7 @@ class OAIMetadataFormatPlugin_DCWGL extends OAIMetadataFormatPlugin {
 	}
 
 	function manage($args, $request) {
-		$this->import('WGLSettingsForm');
+		$this->import('classes.form.WGLSettingsForm');
 		$context = Request::getContext();
 		switch($request->getUserVar('verb')) {
 			case 'settings':
