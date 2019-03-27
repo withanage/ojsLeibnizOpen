@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/oaiMetadataFormats/wgl/OAIMetadataFormat_WGL.inc.php
+ * @file plugins/oaiMetadataFormats/dcwgl/OAIMetadataFormat_DCWGL.inc.php
  *
  * Distributed under the GNU GPL v3
  *
@@ -18,7 +18,7 @@ import('lib.pkp.plugins.oaiMetadataFormats.dc.PKPOAIMetadataFormat_DC');
 /**
  * Class OAIMetadataFormat_WGL  Creates a Leibniz-Open XML File
  */
-class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
+class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 {
 	/**
 	 * @see lib/pkp/plugins/oaiMetadataFormats/dc/PKPOAIMetadataFormat_DC::toXml()
@@ -27,7 +27,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	 * @param $format
 	 * @return string
 	 */
-	function toXml($record, $format = null) {
+	public function toXml($record, $format = null) {
 		$submission = $record->getData('article');
 		$submission = (!empty($submission)) ? $submission : $record->getData('monograph');
 
@@ -35,6 +35,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 		$doc = parent::toXml($publicationFormat);
 		$dom = DOMDocument::loadXML($doc);
 		$dom->formatOutput = true;
+		$dom->encoding ='UTF-8';
 
 
 		$siteAgencies = $this->_getSiteAgencies($submission);
@@ -50,7 +51,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 				$agency = explode(':', $agency);
 				foreach ($siteAgencies as $agenciesInSubmission) {
 					foreach ($agenciesInSubmission as $agencyInSubmission) {
-						if (trim($agency[0]) == $agencyInSubmission) {
+						if (trim($agency[0]) == trim($agencyInSubmission)) {
 							$isLeibnizAgency = true;
 							$leibnizAgency = $agency;
 						}
@@ -65,7 +66,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 
 			$wgl = $this->_createWGLElement($dom);
 
-			$wgl = $this->_copyDCElements($xpath, $dom, $wgl);
+			$wgl = $this->_renameDCElements($xpath, $dom, $wgl);
 
 			$wgl = $this->_setWGLType($submission, $dom, $wgl);
 
@@ -79,7 +80,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 
 			$dom->appendChild($wgl);
 		}
-		return $dom->saveXML();
+		return $dom->saveXML($dom->documentElement);
 
 
 	}
@@ -90,7 +91,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	 * @param $prefix string
 	 * @return DOMElement
 	 */
-	function renameNamespace($node, $doc, $prefix) {
+	public function renameNamespace($node, $doc, $prefix) {
 		$prefixedName = preg_replace('/.*:/', $prefix . ':', $node->nodeName);
 		$newElement = $doc->createElement($prefixedName);
 
@@ -129,7 +130,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	protected function _getSubmissionAgencies() {
 		$context = Request::getContext();
 		$contextId = $context ? $context->getId() : CONTEXT_ID_NONE;
-		$plugin = PluginRegistry::getPlugin('oaiMetadataFormats', 'OAIFormatPlugin_WGL');
+		$plugin = PluginRegistry::getPlugin('oaiMetadataFormats', 'OAIMetadataFormatPlugin_DCWGL');
 		$pluginSettings = $plugin->getSetting($contextId, 'wglSettings');
 		return $pluginSettings;
 	}
@@ -140,7 +141,7 @@ class OAIMetadataFormat_WGL extends PKPOAIMetadataFormat_DC
 	 * @param $ne
 	 * @return mixed
 	 */
-	protected function _copyDCElements(DOMXPath $xpath, $dom, $ne)
+	protected function _renameDCElements(DOMXPath $xpath, $dom, $ne)
 	{
 		$dcElements = $xpath->query("//oai_dc:dc/*");
 		foreach ($dcElements as $node) {

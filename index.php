@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/oaiMetadataFormats/wgl/index.php
+ * @file plugins/oaiMetadataFormats/dcwgl/index.php
  *
  * Distributed under the GNU GPL v3
  *
@@ -10,9 +10,9 @@
  *
  */
 
-require_once('OAIMetadataFormatPlugin_WGL.inc.php');
-require_once('OAIMetadataFormat_WGL.inc.php');
+require_once('OAIMetadataFormatPlugin_DCWGL.inc.php');
+require_once('OAIMetadataFormat_DCWGL.inc.php');
 
-return new OAIMetadataFormatPlugin_WGL();
+return new OAIMetadataFormatPlugin_DCWGL();
 
 
