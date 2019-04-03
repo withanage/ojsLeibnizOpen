@@ -43,8 +43,7 @@ class WGLSettingsForm extends Form
 	function __construct($plugin, $contextId) {
 		$this->_contextId = $contextId;
 		$this->_plugin = $plugin;
-
-		parent::__construct($plugin->getTemplateResource('WGLSettingsForm.tpl'));
+		parent::__construct($plugin->getTemplatePath() . 'templates/WGLSettingsForm.tpl');
 		$this->setData('pluginName', $plugin->getName());
 	}
 
