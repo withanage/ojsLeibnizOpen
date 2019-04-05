@@ -27,7 +27,8 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 * @param $format
 	 * @return string
 	 */
-	public function toXml($record, $format = null) {
+	public function toXml($record, $format = null)
+	{
 		$submission = $record->getData('article');
 		$submission = (!empty($submission)) ? $submission : $record->getData('monograph');
 
@@ -35,7 +36,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		$doc = parent::toXml($publicationFormat);
 		$dom = DOMDocument::loadXML($doc);
 		$dom->formatOutput = true;
-		$dom->encoding ='UTF-8';
+		$dom->encoding = 'UTF-8';
 
 
 		$siteAgencies = $this->_getSiteAgencies($submission);
@@ -54,6 +55,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 						if (trim($agency[0]) == trim($agencyInSubmission)) {
 							$isLeibnizAgency = true;
 							$leibnizAgency = $agency;
+							break;
 						}
 					}
 				}
@@ -64,7 +66,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		if ($isLeibnizAgency) {
 			$xpath = new DOMXPath($dom);
 
-			$wgl = $this->_createWGLElement($dom);
+			$wgl = $dom->createElementNS('http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl', 'oai_wgl:wgl');
 
 			$wgl = $this->_renameDCElements($xpath, $dom, $wgl);
 
@@ -79,8 +81,20 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 			$this->_deleteDCElements($xpath);
 
 			$dom->appendChild($wgl);
+
+			$wglString = $dom->saveXML($wgl);
+			$wglNamespace = "<oai_wgl:wgl \n" .
+				"\txmlns:oai_wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/\"\n" .
+				"\txmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\"\n" .
+				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" .
+				"\txsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/oai_dc/\n" .
+				"\thttp://www.openarchives.org/OAI/2.0/oai_dc.xsd\">\n";
+
+			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
+
+			return $wglString;
+
 		}
-		return $dom->saveXML($dom->documentElement);
 
 
 	}
@@ -91,7 +105,8 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 * @param $prefix string
 	 * @return DOMElement
 	 */
-	public function renameNamespace($node, $doc, $prefix) {
+	public function renameNamespace($node, $doc, $prefix)
+	{
 		$prefixedName = preg_replace('/.*:/', $prefix . ':', $node->nodeName);
 		$newElement = $doc->createElement($prefixedName);
 
@@ -116,7 +131,8 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 * @param $submission
 	 * @return mixed
 	 */
-	protected function _getSiteAgencies($submission) {
+	protected function _getSiteAgencies($submission)
+	{
 		$site = Application::getRequest()->getSite();
 		$submissionAgencyDao = DAORegistry::getDAO('SubmissionAgencyDAO');
 		$siteSupportedLocales = $site->getSupportedLocales();
@@ -127,7 +143,8 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	/**
 	 * @return mixed
 	 */
-	protected function _getSubmissionAgencies() {
+	protected function _getSubmissionAgencies()
+	{
 		$context = Request::getContext();
 		$contextId = $context ? $context->getId() : CONTEXT_ID_NONE;
 		$plugin = PluginRegistry::getPlugin('oaiMetadataFormats', 'OAIMetadataFormatPlugin_DCWGL');
@@ -179,18 +196,4 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		$getParent->removeChild($oaiDCElement);
 	}
 
-	/**
-	 * @param $dom
-	 * @return mixed
-	 */
-	protected function _createWGLElement($dom)
-	{
-		$ne = $dom->createElementNS('http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl', 'oai_wgl:wgl');
-		$ne->setAttribute('xmlns:wgl', 'http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc');
-		$ne->setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-		$ne->setAttribute('xsi:schemaLocation', 'http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd');
-		return $ne;
-	}
 }
-
-
