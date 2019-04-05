@@ -191,7 +191,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 */
 	private function _cleanWGLString($wglString)
 	{
-		$wglNamespace = "<oai_wgl:wgl xmlns:oai_wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/\" xmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\" xmlns:doc=\"http://www.lyncode.com/xoai\" xmlns:xalan=\"http://xml.apache.org/xslt\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/ http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/oai_wgl.xsd\"";
+		$wglNamespace = "<oai_wgl:wgl xmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\" xmlns:doc=\"http://www.lyncode.com/xoai\" xmlns:xalan=\"http://xml.apache.org/xslt\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/ http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/oai_wgl.xsd\"";
 
 		$wglString = str_replace('<oai_wgl:wgl', $wglNamespace, $wglString);
 		$wglString = str_replace('xml:lang="de-DE"', 'xml:lang="de"', $wglString);
