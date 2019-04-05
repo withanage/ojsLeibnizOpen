@@ -36,7 +36,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 
 		$dom = DOMDocument::loadXML( parent::toXml($doc));
 		$dom->formatOutput = true;
-		$dom->encoding ='UTF-8';
+		$dom->encoding = 'UTF-8';
 
 
 		$siteAgencies = $this->_getSiteAgencies($submission);
@@ -55,6 +55,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 						if (trim($agency[0]) == trim($agencyInSubmission)) {
 							$isLeibnizAgency = true;
 							$leibnizAgency = $agency;
+							break;
 						}
 					}
 				}
@@ -65,7 +66,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		if ($isLeibnizAgency) {
 			$xpath = new DOMXPath($dom);
 
-			$wgl = $this->_createWGLElement($dom);
+			$wgl = $dom->createElementNS('http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl', 'oai_wgl:wgl');
 
 			$wgl = $this->_renameDCElements($xpath, $dom, $wgl);
 
@@ -80,8 +81,18 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 			$this->_deleteDCElements($xpath);
 
 			$dom->appendChild($wgl);
+
+			$wglString = $dom->saveXML($wgl);
+			$wglNamespace = "<oai_wgl:wgl" .
+				"\txmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\"" .
+				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" .
+				"\txsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/oai_dc/" .
+				"\thttp://www.openarchives.org/OAI/2.0/oai_dc.xsd\"";
+
+			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
+
+			return $wglString.'\n';
 		}
-		return $dom->saveXML($dom->documentElement);
 
 
 	}
@@ -180,18 +191,6 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		$getParent->removeChild($oaiDCElement);
 	}
 
-	/**
-	 * @param $dom
-	 * @return mixed
-	 */
-	protected function _createWGLElement($dom)
-	{
-		$ne = $dom->createElementNS('http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl', 'oai_wgl:wgl');
-		$ne->setAttribute('xmlns:wgl', 'http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc');
-		$ne->setAttribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance');
-		$ne->setAttribute('xsi:schemaLocation', 'http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd');
-		return $ne;
-	}
 }
 
 
