@@ -83,11 +83,10 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 
 			$wglString = $dom->saveXML($wgl);
 			$wglNamespace = "<oai_wgl:wgl \n" .
-				"\txmlns:oai_wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/\"\n" .
 				"\txmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\"\n" .
 				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" .
 				"\txsi:schemaLocation=\"http://www.openarchives.org/OAI/2.0/oai_dc/\n" .
-				"\thttp://www.openarchives.org/OAI/2.0/oai_dc.xsd\">\n";
+				"\thttp://www.openarchives.org/OAI/2.0/oai_dc.xsd\"";
 
 			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
 
