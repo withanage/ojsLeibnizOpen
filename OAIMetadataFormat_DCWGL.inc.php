@@ -27,8 +27,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 * @param $format
 	 * @return string
 	 */
-	public function toXml($record, $format = null)
-	{
+	public function toXml($record, $format = null) {
 		$submission = $record->getData('article');
 		$submission = (!empty($submission)) ? $submission : $record->getData('monograph');
 
@@ -93,7 +92,6 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
 
 			return $wglString;
-
 		}
 
 
@@ -105,8 +103,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 * @param $prefix string
 	 * @return DOMElement
 	 */
-	public function renameNamespace($node, $doc, $prefix)
-	{
+	public function renameNamespace($node, $doc, $prefix) {
 		$prefixedName = preg_replace('/.*:/', $prefix . ':', $node->nodeName);
 		$newElement = $doc->createElement($prefixedName);
 
@@ -131,8 +128,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 * @param $submission
 	 * @return mixed
 	 */
-	protected function _getSiteAgencies($submission)
-	{
+	protected function _getSiteAgencies($submission) {
 		$site = Application::getRequest()->getSite();
 		$submissionAgencyDao = DAORegistry::getDAO('SubmissionAgencyDAO');
 		$siteSupportedLocales = $site->getSupportedLocales();
@@ -143,8 +139,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	/**
 	 * @return mixed
 	 */
-	protected function _getSubmissionAgencies()
-	{
+	protected function _getSubmissionAgencies() {
 		$context = Request::getContext();
 		$contextId = $context ? $context->getId() : CONTEXT_ID_NONE;
 		$plugin = PluginRegistry::getPlugin('oaiMetadataFormats', 'OAIMetadataFormatPlugin_DCWGL');
@@ -197,3 +192,5 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	}
 
 }
+
+
