@@ -83,13 +83,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 			$dom->appendChild($wgl);
 
 			$wglString = $dom->saveXML($wgl);
-			$wglNamespace = "<oai_wgl:wgl" .
-				"\txmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\"" .
-				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" .
-				"\txsi:schemaLocation=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/ http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/oai_wgl.xsd\""
-				;
-
-			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
+			$wglString = $this->_cleanWGLString($wglString);
 
 			return $wglString;
 		}
@@ -189,6 +183,23 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		$oaiDCElement = $xpath->query("//oai_dc:dc")->item(0);
 		$getParent = $oaiDCElement->parentNode;
 		$getParent->removeChild($oaiDCElement);
+	}
+
+	/**
+	 * @param $wglString
+	 * @return string
+	 */
+	private function _cleanWGLString($wglString)
+	{
+		$wglNamespace = "<oai_wgl:wgl" .
+			"\txmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\"" .
+			"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" .
+			"\txsi:schemaLocation=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/ http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/oai_wgl.xsd\"";
+
+		$wglString = str_replace('<oai_wgl:wgl', $wglNamespace, $wglString);
+		$wglString = str_replace('xml:lang="de-DE"', 'xml:lang="de"', $wglString);
+		$wglString = str_replace('xml:lang="en-US"', 'xml:lang="en"', $wglString);
+		return $wglString;
 	}
 
 }
