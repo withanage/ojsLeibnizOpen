@@ -32,8 +32,9 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		$submission = (!empty($submission)) ? $submission : $record->getData('monograph');
 
 		$publicationFormat = $record->getData('publicationFormat');
-		$doc = parent::toXml($publicationFormat);
-		$dom = DOMDocument::loadXML($doc);
+		$doc = (!empty($publicationFormat)) ?$publicationFormat: $submission ;
+
+		$dom = DOMDocument::loadXML( parent::toXml($doc));
 		$dom->formatOutput = true;
 		$dom->encoding = 'UTF-8';
 
@@ -90,7 +91,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 
 			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
 
-			return $wglString.'\n';
+			return $wglString;
 		}
 
 
