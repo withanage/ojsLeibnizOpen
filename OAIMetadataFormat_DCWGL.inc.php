@@ -189,7 +189,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 	 * @param $wglString
 	 * @return string
 	 */
-	private function _cleanWGLString($wglString): string
+	private function _cleanWGLString($wglString)
 	{
 		$wglNamespace = "<oai_wgl:wgl" .
 			"\txmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\"" .
