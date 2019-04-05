@@ -91,7 +91,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 
 			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
 
-			return $wglString.'\n';
+			return $wglString;
 		}
 
 
