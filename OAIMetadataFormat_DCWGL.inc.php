@@ -86,7 +86,8 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 			$wglNamespace = "<oai_wgl:wgl" .
 				"\txmlns:wgl=\"http://www.leibnizopen.de/fileadmin/default/documents/wgl_dc/\"" .
 				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" .
-				"xsi:schemaLocation=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/ http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/oai_wgl.xsd\"";
+				"\txsi:schemaLocation=\"http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/ http://www.leibnizopen.de/fileadmin/default/documents/oai_wgl/oai_wgl.xsd\""
+				;
 
 			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
 
