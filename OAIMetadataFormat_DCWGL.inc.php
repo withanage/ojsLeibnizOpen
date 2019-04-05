@@ -90,6 +90,8 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 				;
 
 			$wglString = str_replace('<oai_wgl:wgl',$wglNamespace,$wglString);
+			$wglString = str_replace('xml:lang="de-DE"','xml:lang="de"',$wglString);
+			$wglString = str_replace('xml:lang="en-US"','xml:lang="en"',$wglString);
 
 			return $wglString;
 		}
