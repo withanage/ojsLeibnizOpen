@@ -87,9 +87,6 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 
 			return $wglString;
 		}
-		else {
-			return  parent::toXml($doc);
-		}
 
 
 	}
