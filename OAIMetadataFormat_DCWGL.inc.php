@@ -49,7 +49,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		if (isset($submissionAgencies) & !empty($submissionAgencies)) {
 			$leibnizAgencies = explode('|', $submissionAgencies);
 			foreach ($leibnizAgencies as $agency) {
-				$agency = explode(':', $agency);
+				$agency = explode(':', trim($agency));
 				foreach ($siteAgencies as $agenciesInSubmission) {
 					foreach ($agenciesInSubmission as $agencyInSubmission) {
 						if (trim($agency[0]) == trim($agencyInSubmission)) {
