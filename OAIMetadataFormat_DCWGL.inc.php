@@ -32,7 +32,7 @@ class OAIMetadataFormat_DCWGL extends PKPOAIMetadataFormat_DC
 		$submission = (!empty($submission)) ? $submission : $record->getData('monograph');
 
 		$publicationFormat = $record->getData('publicationFormat');
-		$doc = parent::toXml($publicationFormat);
+		$doc = parent::toXml($submission, $publicationFormat);
 		$dom = DOMDocument::loadXML($doc);
 		$dom->formatOutput = true;
 		$dom->encoding = 'UTF-8';
