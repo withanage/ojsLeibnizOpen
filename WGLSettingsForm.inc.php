@@ -29,7 +29,7 @@ class WGLSettingsForm extends Form
 		$this->_context = $contextId;
 		$this->_plugin = $plugin;
 
-		parent::__construct(join(DIRECTORY_SEPARATOR,array($plugin->getTemplatePath() ,'templates', 'WGLSettingsForm.tpl')));
+		parent::__construct(method_exists($plugin, 'getTemplateResource') ? $plugin->getTemplateResource('WGLSettingsForm.tpl') : $plugin->getTemplatePath() . 'WGLSettingsForm.tpl');
 		$this->setData('pluginName', $plugin->getName());
 	}
 
@@ -65,12 +65,8 @@ class WGLSettingsForm extends Form
 		return $plugin->manage($args, $request);
 	}
 
-	function fetch($request) {
+	function fetch($request, $template = NULL, $display = false) {
 		$templateMgr = TemplateManager::getManager($request);
 		return parent::fetch($request);
 	}
-
-
-
-
 }
